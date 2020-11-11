@@ -6,14 +6,19 @@ This repo collect all documentation and excersise to do holberton Preshell.
 
 ## Index
 
-### [PID & PPID](./0x00-pid_ppid)
-### [Arguments](./0x01-arguments)
-### [Fork + Wait + execve](./0x02-fork_wait_execve)
-### [Super simple shell](./0x03-super_simple_shell)
-### [File information](./0x04-file_info)
-### [Enviroment](./0x05-enviroment)
-### [Testing files](./test)
-### [Documentation](https://drive.google.com/drive/folders/1HOU6h_Ofjl3fO6QfnV9r8UijozuU_DqR?usp=sharing)
+### Exercises
+
+* [PID & PPID](./0x00-pid_ppid)
+* [Arguments](./0x01-arguments)
+* [Fork + Wait + execve](./0x02-fork_wait_execve)
+* [Super simple shell](./0x03-super_simple_shell)
+* [File information](./0x04-file_info)
+* [Enviroment](./0x05-enviroment)
+
+### Others
+
+* [Testing files](./test)
+* [Documentation](https://drive.google.com/drive/folders/1HOU6h_Ofjl3fO6QfnV9r8UijozuU_DqR?usp=sharing)
 
 ---
 
