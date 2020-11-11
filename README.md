@@ -24,10 +24,16 @@ This repo collect all documentation and excersise to do holberton Preshell.
 
 ## Authors
 
+* **Soren Acevedo** - [SorenAcevedo](https://github.com/SorenAcevedo)
+
 * **David Alzate Alzate** - [illker](https://github.com/illker)
 
 * **Estephania Calvo Carvajal** - [EstephaniaCalvoC](https://github.com/EstephaniaCalvoC)
 
+* **Carolina Hernandez** - [CarolinaHV](https://github.com/CarolinaHV)
+
 * **Nicolás Herrera** - [nicolasherrerac](https://github.com/nicolasherrerac)
+
+* **Juan Manuel Ramírez** - [juan8bits]((https://github.com/juan8bits)
 
 * **Victor Plaza** - [vic-1998](https://github.com/vic-1998)
