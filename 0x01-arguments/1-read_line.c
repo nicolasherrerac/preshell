@@ -20,5 +20,6 @@ int main(void)
         }
         else
                 printf("%s", line);
+	free(line);
 	return (0);
 }
