@@ -12,19 +12,17 @@ char **get_array(void)
 	size_t len = 0;
 	char *word;
 	const char limit[2] = " ";
-	int i = 0;/*Runer*/
+	int i;/*Runer*/
 	int contsp = 0;/*Counter limit*/
 	char **array = NULL;
-
-	printf("$ ");
 
 	/*Get line*/
 	getline(&line, &len, stdin);
 
 	/*Count limit char*/
-	for(len--; len >= 0; len--)
+	for(i = 0 ; line[i] != 0; i++)
 	{
-		if (line[len] == *limit)
+		if (line[i] == limit[0])
 			contsp++;
 	}
 
@@ -32,14 +30,14 @@ char **get_array(void)
 	array = malloc(sizeof(char *) * (contsp + 1));
 
 	/*Full array*/
-	word = strtok(line, limit);
-	array[i] = strdup(word);
+	array[0] = strtok(line, limit);
 
 	for(i = 1; i <= contsp; i++)
 	{
-		word =  strtok(NULL, limit);
-		array[i] = strdup(word);
+		array[i] = strtok(NULL, limit);
 	}
+
+	free(line);
 
 	return (array);
 }
@@ -50,7 +48,7 @@ char **get_array(void)
  */
 int main(void)
 {
-	char **av;
+	char **av = NULL;
 	int i = 0;/*Runner*/
 
 	printf("$ ");
@@ -60,10 +58,9 @@ int main(void)
 	/*Print and free each array's elements*/
 	for (; av[i] != NULL; i++)
 	{
-		printf("%s\n", av[i]);
-		free(av[i]);
+		printf("Indice %d palabra %s\n", i, av[i]);
 	}
-	free(av[i]);
+	free(av);
 
-	return 0;
+	return (0);
 }
