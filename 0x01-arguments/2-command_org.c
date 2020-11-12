@@ -10,7 +10,6 @@ char **get_array(void)
 {
 	char *line = NULL;
 	size_t len = 0;
-	char *word;
 	const char limit[2] = " ";
 	int i;/*Runer*/
 	int contsp = 0;/*Counter limit*/
