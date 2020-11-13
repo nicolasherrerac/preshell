@@ -13,13 +13,14 @@
  */
 unsigned int _strlen(char *str)
 {
-	unsigned int len;
+	unsigned int len = 0;
 
 	if (!str)
 		return (0);
 
-	while (str)
+	while (str[len])
 		len++;
+
 	return (len);
 }
 
@@ -33,7 +34,8 @@ ssize_t prt_stdo(char *str)
 	unsigned int s_len;
 
 	s_len = _strlen(str);
-	n_chars = write(STDOUT_FILENO, str, s_len);
+	n_chars = write(1, str, s_len);
+
 	return (n_chars);
 }
 
@@ -45,14 +47,19 @@ ssize_t prt_stdo(char *str)
 int main(int ac, char **argv)
 {
 	char *line;
+	char *prompt = "#cisfun$ ";
 	size_t len;
 	char **av;
+	int end = 1;
 
-	/*Prompt*/
-
-	while (1)
+	while(1)
 	{
-		prt_stdo("#cisfun$ ");
-		getline(&line, &len, stdin);
+		prt_stdo(prompt);
+		end = getline(&line, &len, stdin);
+		prt_stdo(line);
 	}
+
+	free(line);
+
+	return (0);
 }
