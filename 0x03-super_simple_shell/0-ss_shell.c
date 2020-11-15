@@ -60,7 +60,7 @@ int _getline(char **line, size_t *len)
 
 	strncpy(lline, *line, n_chars - 1);
 
-	free(*line);
+	free(line);
 	*line = lline;
 
 	return (n_chars);
