@@ -6,6 +6,7 @@
 #include <unistd.h>
 #include <stdarg.h>
 #include <sys/wait.h>
+#include <string.h>
 
 /**
  * _strlen - Count the amount of character of a string.
@@ -40,6 +41,37 @@ ssize_t prt_stdo(char *str)
 }
 
 /**
+ * _getline - Get a line and remove \n character.
+ *
+ * Return: A pointer to the line.
+ */
+unsigned int _getline(char **line, size_t *len)
+{
+	//char *command;
+	unsigned int n_chars = 0;
+	char *lline = NULL;
+
+	n_chars = getline(line, len, stdin);
+	if (n_chars <= 0)
+		return (n_chars);
+
+	lline = malloc((n_chars) * sizeof(char));
+
+	strncpy(lline, *line, n_chars - 1);
+	for (int i = 0; i < (n_chars - 1); i++)
+	{
+		if (lline[i] == '\n')
+			printf("Salto\n");
+		else
+			printf("%c\n", lline[i]);
+        }
+
+	free(lline);
+
+	return (n_chars);
+}
+
+/**
  * main - Super simple shell
  * @ac: Number of arguments.
  * @av: String of arguments.
@@ -50,13 +82,25 @@ int main(int ac, char **argv)
 	char *prompt = "#cisfun$ ";
 	size_t len;
 	char **av;
-	int end = 1;
+	int n_chars = 1;
 
 	while(1)
 	{
-		prt_stdo(prompt);
-		end = getline(&line, &len, stdin);
-		prt_stdo(line);
+		printf("#cisfun$ ");
+		/*n_chars = getline(&line, &len, stdin);*/
+		n_chars = _getline(&line, &len);
+		if (n_chars == -1)
+		{
+			printf("EXIT\n");
+			break;
+		}
+		if (n_chars == 0)
+			printf("%s", line);
+		else if (*line != '\n')
+		{
+			printf("%s", line);
+			//execute();
+		}
 	}
 
 	free(line);
