@@ -56,12 +56,13 @@ int _getline(char **line, size_t *len)
 	if (n_chars <= 0)
 		return (n_chars);
 
-	lline = malloc((n_chars) * sizeof(char));
+	/*lline = malloc((n_chars) * sizeof(char));
 
 	strncpy(lline, *line, n_chars - 1);
 
-	free(line);
-	*line = lline;
+	free(*line);
+	*line = NULL;
+	*line = lline;*/
 
 	return (n_chars);
 }
@@ -73,10 +74,11 @@ int _getline(char **line, size_t *len)
  */
 int main(int ac, char **argv)
 {
-	char *line;
+	char *line = NULL;
+	char *lline = NULL;
 	char *prompt = "#cisfun$ ";
 	size_t len = 0;
-	char **av;
+	char **av = NULL;
 	int n_chars = 1;
 
 	while(1)
@@ -94,12 +96,14 @@ int main(int ac, char **argv)
 		}
 		else if (*line != '\n')
 		{
+			line[n_chars -1] = '\0';
 			printf("Executar el comando %s\n", line);
+			free(line);
 			//execute();
 		}
 	}
 
-	free(line);
+	//free(line);
 
 	return (0);
 }
