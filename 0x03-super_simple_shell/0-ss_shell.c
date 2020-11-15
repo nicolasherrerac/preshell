@@ -45,11 +45,12 @@ ssize_t prt_stdo(char *str)
  *
  * Return: A pointer to the line.
  */
-unsigned int _getline(char **line, size_t *len)
+int _getline(char **line, size_t *len)
 {
 	//char *command;
-	unsigned int n_chars = 0;
+	int n_chars = 0;
 	char *lline = NULL;
+	int i;
 
 	n_chars = getline(line, len, stdin);
 	if (n_chars <= 0)
@@ -58,15 +59,9 @@ unsigned int _getline(char **line, size_t *len)
 	lline = malloc((n_chars) * sizeof(char));
 
 	strncpy(lline, *line, n_chars - 1);
-	for (int i = 0; i < (n_chars - 1); i++)
-	{
-		if (lline[i] == '\n')
-			printf("Salto\n");
-		else
-			printf("%c\n", lline[i]);
-        }
 
-	free(lline);
+	free(*line);
+	*line = lline;
 
 	return (n_chars);
 }
@@ -80,14 +75,13 @@ int main(int ac, char **argv)
 {
 	char *line;
 	char *prompt = "#cisfun$ ";
-	size_t len;
+	size_t len = 0;
 	char **av;
 	int n_chars = 1;
 
 	while(1)
 	{
 		printf("#cisfun$ ");
-		/*n_chars = getline(&line, &len, stdin);*/
 		n_chars = _getline(&line, &len);
 		if (n_chars == -1)
 		{
@@ -95,10 +89,12 @@ int main(int ac, char **argv)
 			break;
 		}
 		if (n_chars == 0)
-			printf("%s", line);
+		{
+			printf("%s\n", line);
+		}
 		else if (*line != '\n')
 		{
-			printf("%s", line);
+			printf("Executar el comando %s\n", line);
 			//execute();
 		}
 	}
