@@ -97,8 +97,9 @@ int main(int ac, char **argv)
 		else if (*line != '\n')
 		{
 			line[n_chars -1] = '\0';
-			printf("Executar el comando %s\n", line);
+			printf("Ejecutar el comando %s\n", line);
 			free(line);
+			line = NULL;
 			//execute();
 		}
 	}
