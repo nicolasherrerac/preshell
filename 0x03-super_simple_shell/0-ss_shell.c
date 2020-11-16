@@ -11,6 +11,7 @@
 /**
  * _strlen - Count the amount of character of a string.
  * @str: String.
+ * Return: Number of characters in the string.
  */
 unsigned int _strlen(char *str)
 {
@@ -27,80 +28,81 @@ unsigned int _strlen(char *str)
 
 /**
  * prt_stdo - Print simple string with write in the stdo.
- * str - String to print.
+ * @str: String to print.
  */
-ssize_t prt_stdo(char *str)
+void prt_stdo(char *str)
 {
 	ssize_t n_chars;
 	unsigned int s_len;
 
 	s_len = _strlen(str);
 	n_chars = write(1, str, s_len);
-
-	return (n_chars);
 }
 
 /**
- * _getline - Get a line and remove \n character.
- *
- * Return: A pointer to the line.
+ * execute - Execute a command indicate in a string.
+ * @line: Command
+ * Return: 0 if succes or -1 if fork fail.
  */
-int _getline(char **line, size_t *len)
+int execute(char *line)
 {
-	//char *command;
-	int n_chars = 0;
-	char *lline = NULL;
-	int i;
+	char *argv[4] = {NULL, NULL, NULL, NULL};
+	pid_t child_pid;
 
-	n_chars = getline(line, len, stdin);
-	if (n_chars <= 0)
-		return (n_chars);
+	child_pid = fork();
 
-	/*lline = malloc((n_chars) * sizeof(char));
+	if (child_pid == -1)
+	{
+		perror("Error");
+		return (-1);
+	}
 
-	strncpy(lline, *line, n_chars - 1);
-
-	free(*line);
-	*line = NULL;
-	*line = lline;*/
-
-	return (n_chars);
+	if (child_pid == 0)
+	{
+		argv[0] = line;
+		if (execve(argv[0], argv, NULL) == -1)
+		{
+			perror("Error");
+			exit(98);
+		}
+	}
+	else
+	{
+		wait(NULL);
+		/*printf("Terminado %d\n", child_pid);*/
+	}
+	return (0);
 }
 
 /**
- * main - Super simple shell
- * @ac: Number of arguments.
- * @av: String of arguments.
+ * main - Super simple shell.
+ * Return: 0 in succes.
  */
-int main(int ac, char **argv)
+int main(void)
 {
 	char *line = NULL;
-	char *lline = NULL;
-	char *prompt = "#cisfun$ ";
 	size_t len = 0;
-	char **av = NULL;
-	int n_chars = 1;
+	int n_chars = 0;
 
-	while(1)
+	while (1)
 	{
-		printf("#cisfun$ ");
-		n_chars = _getline(&line, &len);
+		prt_stdo("#cisfun$ ");
+		n_chars = getline(&line, &len, stdin);
 		if (n_chars == -1)
 		{
-			printf("EXIT\n");
+			/*prt_stdo("EXIT\n");*/
+			prt_stdo("\n");
 			break;
-		}
-		if (n_chars == 0)
-		{
-			printf("%s\n", line);
 		}
 		else if (*line != '\n')
 		{
 			line[n_chars - 1] = '\0';
-			printf("Ejecutar el comando %s\n", line);
+			/*prt_stdo("Ejecutar el comando ");*/
+			/*prt_stdo(line);*/
+			/*prt_stdo("\n");*/
+			execute(line);
 			free(line);
 			line = NULL;
-			//execute();
 		}
 	}
 
