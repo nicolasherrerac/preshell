@@ -13,9 +13,8 @@ char **get_dir(char *line)
 			contpnt++;
 	}
 
-	array = malloc(sizeof(char *) * contpnt + 2);
-	if (!array)
-		return (NULL);
+	array = malloc(sizeof(char *) * (contpnt + 2));
+
 	array[0] = strtok(line, limit);
 	for (i = 1; i <= contpnt; i++)
 	{
@@ -26,8 +25,8 @@ char **get_dir(char *line)
 }
 list_t *add_node_end(list_t **head, char *str)
 {
-	list_t *endnode;
-	list_t *end;
+	list_t *endnode = NULL;
+	list_t *end = NULL;
 
 	endnode = malloc(sizeof(list_t));
 	if (!endnode)
@@ -46,6 +45,7 @@ list_t *add_node_end(list_t **head, char *str)
 	}
 	endnode->str = str;
 	end->next = endnode;
+	endnode->next = NULL;
 	return (endnode);
 }
 size_t print_list(list_t *h)
@@ -86,7 +86,7 @@ int main(int argc, char *argv[])
 	{
 		printf("ERROR\n");
 		return (-1);
-	}
+		}
 	if (!argv[1])
 	{
 		printf("Pase un argumento != NULL\n");
