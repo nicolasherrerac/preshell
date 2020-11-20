@@ -21,7 +21,7 @@ char **get_dir(char *line)
 			contpnt++;
 	}
 
-	array = malloc(sizeof(char *) * contpnt + 2);
+	array = malloc(sizeof(char *) * (contpnt + 2));
 
 	array[0] = strtok(line, limit);
 	for (i = 1; i <= contpnt; i++)
@@ -80,6 +80,7 @@ int main(int argc, char *argv[])
 		/* Close directory and exit.*/
 		closedir(pDir);
 	}
+	free(sDir);
 	printf("TOTAL DIRECTORIES %d\n", dirs);
 	return (0);
 }
